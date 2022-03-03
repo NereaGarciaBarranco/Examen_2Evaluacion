@@ -8,6 +8,14 @@ public class Jugador {
 	private int calidadPorteria;
 	private int vidas;
 	
+	public Jugador (String nombre, int dorsal) {
+		this.nombre = nombre;
+		this.dorsal = dorsal;
+		habilidadDisparo();
+		habilidadPorteria();
+		vidas = 2;
+	}
+	
 	public String getNombre() {
 		return nombre;
 	}
@@ -48,5 +56,16 @@ public class Jugador {
 		this.vidas = vidas;
 	}
 	
+	public int habilidadPorteria() {
+		return 0;
+	}
+	
+	public int habilidadDisparo() {
+		return 0;
+	}
+	
+	public String toString() {
+		return nombre + " " + dorsal + " " + potenciaDisparo + " " + calidadPorteria + " " + vidas;
+	}
 	
 }

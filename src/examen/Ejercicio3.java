@@ -6,11 +6,6 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 
-//Implementa un método informacionVideojuegos() que devuelve un ArrayList<String> que
-//agrupe todas las plataformas para las que hay videojuegos en el fichero entregado. Es
-//decir, se debe almacenar UNA SOLA VEZ, cada una de las plataformas que aparecen en
-//el fichero .csv.
-
 public class Ejercicio3 {
 	public static void main(String[] args) {
 		informacionVideojuegos();
@@ -32,12 +27,8 @@ public class Ejercicio3 {
 					if (plataformas.size() == 0) {
 						plataformas.add(nombre);
 					} else { 
-						for (int i = 0; i < plataformas.size(); i++) {
-							if (!plataformas.get(i).equals(nombre)) {
-								plataformas.add(nombre);
-								System.out.println(nombre);
-								break;
-							}
+						if(comprobarPlataforma(nombre, plataformas) == false) {
+							plataformas.add(nombre);
 						}
 					}
 				}
@@ -54,5 +45,16 @@ public class Ejercicio3 {
 			e.printStackTrace();
 		}	
 		return plataformas;
+	}
+	
+	public static boolean comprobarPlataforma(String nombre, ArrayList<String> plataformas) {
+		boolean aparece = false;
+		for (int i = 0; i < plataformas.size(); i++) {
+			if(plataformas.get(i).equals(nombre)) {
+				aparece = true;
+				return aparece;
+			}
+		}
+		return aparece;
 	}
 }
