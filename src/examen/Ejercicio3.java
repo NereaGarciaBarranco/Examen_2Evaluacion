@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+
 //Implementa un método informacionVideojuegos() que devuelve un ArrayList<String> que
 //agrupe todas las plataformas para las que hay videojuegos en el fichero entregado. Es
 //decir, se debe almacenar UNA SOLA VEZ, cada una de las plataformas que aparecen en
@@ -27,12 +28,25 @@ public class Ejercicio3 {
 				// Así evitamos la cabecera del archivo
 				if (contador != 0) {
 					String[] datos = uso.split(",");
-					System.out.println(datos[2]);
-					
+					String nombre = datos[2];
+					if (plataformas.size() == 0) {
+						plataformas.add(nombre);
+					} else { 
+						for (int i = 0; i < plataformas.size(); i++) {
+							if (!plataformas.get(i).equals(nombre)) {
+								plataformas.add(nombre);
+								System.out.println(nombre);
+								break;
+							}
+						}
+					}
 				}
 				contador++;
 			}
 			f.close();
+			for (int i = 0; i < plataformas.size(); i++) {
+				System.out.println(plataformas.get(i));
+			}
 			return plataformas;
 
 		} catch (FileNotFoundException e) {
