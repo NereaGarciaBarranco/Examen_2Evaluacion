@@ -11,8 +11,16 @@ public class Jugador {
 	public Jugador (String nombre, int dorsal) {
 		this.nombre = nombre;
 		this.dorsal = dorsal;
-		habilidadDisparo();
-		habilidadPorteria();
+		potenciaDisparo = (int) Math.round(Math.random() * 50);
+		calidadPorteria = (int) Math.round(Math.random() * 50);
+		vidas = 2;
+	}
+	
+	public Jugador () {
+		nombre = "";
+		dorsal = 99999;
+		potenciaDisparo = 0;
+		calidadPorteria = 0;
 		vidas = 2;
 	}
 	
@@ -54,14 +62,6 @@ public class Jugador {
 	
 	public void setVidas(int vidas) {
 		this.vidas = vidas;
-	}
-	
-	public int habilidadPorteria() {
-		return 0;
-	}
-	
-	public int habilidadDisparo() {
-		return 0;
 	}
 	
 	public String toString() {
