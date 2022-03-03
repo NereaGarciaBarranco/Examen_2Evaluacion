@@ -4,8 +4,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-//C:\Users\Nerea\Desktop\textoExamen.txt
-
 public class Ejercicio2 {
 	/**
 	 * Pre: ---
@@ -22,7 +20,7 @@ public class Ejercicio2 {
 		int longitud = entrada.nextInt();
 		int resultado = 0;
 		resultado = palabrasMasLargasQue(longitud, ruta);	
-		System.out.println(resultado);
+		System.out.println("Hay un total de " + resultado + " palabras.");
 	}
 	
 	/**
@@ -46,6 +44,7 @@ public class Ejercicio2 {
 				String[] palabras = linea.split(" ");
 				for (int i = 0; i < palabras.length; i++) {
 					if (palabras[i].length() >= longitud) {
+						System.out.println(palabras[i]);
 						contador++;
 					}
 				}

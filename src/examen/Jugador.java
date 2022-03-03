@@ -1,7 +1,6 @@
 package examen;
 
 public class Jugador {
-	
 	private String nombre;
 	private int dorsal;
 	private int potenciaDisparo;
@@ -16,6 +15,7 @@ public class Jugador {
 		vidas = 2;
 	}
 	
+	// Metodo constructor vacio para usarlo como auxiliar
 	public Jugador () {
 		nombre = "";
 		dorsal = 99999;
@@ -24,6 +24,7 @@ public class Jugador {
 		vidas = 2;
 	}
 	
+	// Metodos get y set de la clase Jugador
 	public String getNombre() {
 		return nombre;
 	}
@@ -64,6 +65,7 @@ public class Jugador {
 		this.vidas = vidas;
 	}
 	
+	@Override
 	public String toString() {
 		return nombre + " " + dorsal + " " + potenciaDisparo + " " + calidadPorteria + " " + vidas;
 	}

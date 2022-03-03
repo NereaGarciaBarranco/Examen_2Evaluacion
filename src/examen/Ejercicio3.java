@@ -5,12 +5,16 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-
 public class Ejercicio3 {
 	public static void main(String[] args) {
 		informacionVideojuegos();
 	}
 	
+	/**
+	 * Pre: ---
+	 * Post: Este metodo recorre un fichero y recoge en un ArrayList los nombres
+	 * diferentes de plataformas que hay en él. 
+	 */
 	public static ArrayList<String> informacionVideojuegos() {	
 		String ruta = "C:\\Users\\Nerea\\Desktop\\ventasVideojuegos.csv";
 		File fichero = new File (ruta);
@@ -24,9 +28,11 @@ public class Ejercicio3 {
 				if (contador != 0) {
 					String[] datos = uso.split(",");
 					String nombre = datos[2];
+					// La primera vez siempre se añade porque es imposible que este
 					if (plataformas.size() == 0) {
 						plataformas.add(nombre);
 					} else { 
+						// El restp de veces comprobamos si esta y si no, lo añadimos
 						if(comprobarPlataforma(nombre, plataformas) == false) {
 							plataformas.add(nombre);
 						}
@@ -46,6 +52,12 @@ public class Ejercicio3 {
 		}	
 		return plataformas;
 	}
+	
+	/**
+	 * Pre: ---
+	 * Post: Este metodo comprueba si un nombre de una plataforma se encuentra ya 
+	 * dentro del ArrayList que se le pasa como parametro o no. 
+	 */
 	
 	public static boolean comprobarPlataforma(String nombre, ArrayList<String> plataformas) {
 		boolean aparece = false;

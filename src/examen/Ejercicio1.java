@@ -3,27 +3,13 @@ package examen;
 import java.util.ArrayList;
 import java.util.Collections;
 
-// Usar arraylist aunque luego metamos solo 10
-// Habilidad disparo y habilidad portero no hay que currarselo, por ej multiplicar por un numero random
-
-//“El rápido” es un clásico juego de fútbol en el que participan un total de N
-//jugadores (para este ejercicio van a ser 10). Su reglas son las siguientes: se organizan los
-//turnos de disparo de cada uno de los jugadores (de forma aleatorio). Uno de ellos se sitúa
-//en la portería y el siguiente dispara intentando meter gol. Si el jugador que ha disparado
-//consigue meter gol, se le resta 1 vida al portero. Sea cual sea el resultado del disparo, el
-//jugador que ha chutado a portería pasa a ser el portero en el siguiente turno. El juego
-//acaba cuando sólo queda un jugador vivo.
-//Desarrolla la clase Jugador, formada por un nombre, dorsal, potencia de disparo, calidad
-//en la portería, y vidas (se inicializa siempre con valor 2). Además, implementa los
-//métodos habilidadDisparo() y habilidadPorteria(). Programa los métodos como creas
-//conveniente, usando los atributos potencia de disparo y calidad en la portería (ambos
-//deben devolver un número entero). Ten en cuenta que, para saber si el jugador que ha
-//disparado ha metido gol, deberás usar los métodos habilidadDisparo() del lanzador y el
-//método habilidadPorteria() del portero.
-//Una vez hayas completado el paso anterior, programa la clase Main que permita jugar al
-//juego.
-
 public class Ejercicio1 {
+	/**
+	 * Pre: ---
+	 * Post: En este metodo main se juegan los 10 jugadores necesarios
+	 * para jugar al Rapido y se llama al metodo necesario para que se 
+	 * realice.
+	 */
 	public static void main(String[] args) {
 		// Creamos los 10 jugadores de nuestro juego
 		ArrayList<Jugador> jugadores = new ArrayList<Jugador>();
@@ -47,14 +33,23 @@ public class Ejercicio1 {
 		jugadores.add(jugador9);
 		Jugador jugador10 = new Jugador("Blas", 10);
 		jugadores.add(jugador10);
-
-		
+		jugarRapido(jugadores);
+	}
+	
+	/**
+	 * Pre: ---
+	 * Post: Este metodo recibe una tabla de jugadores y los emplea para 
+	 * jugar al juego de futbol "el Rapido".
+	 */
+	public static void jugarRapido(ArrayList<Jugador> jugadores) {
 		// Los desordenamos para que jueguen en un orden aleatorio
 		Collections.shuffle(jugadores);
+		System.out.println("Juegan en el siguiente orden:");
+		// Estos bucles muestran por pantalla el orden
 		for (int i = 0; i < jugadores.size(); i++) {
 			System.out.println(jugadores.get(i).toString());
 		}
-		// Mientras siga quedando mas de un jugador el juego sigue
+		// Mientras siga quedando mas de un jugador vivo el juego sigue
 		while (jugadores.size() > 1) {
 			// El primer jugador se pone de portero y el segundo tira y van cambiando
 			for (int i = 0; i < jugadores.size(); i++) {
@@ -71,32 +66,49 @@ public class Ejercicio1 {
 				else {
 					tirador = jugadores.get(i + 1);
 				}
-
-				int disparo = habilidadDisparo();
-				int parada = habilidadPorteria();
-				portero.setCalidadPorteria(parada);
-				tirador.setPotenciaDisparo(disparo);
-				if (tirador.getPotenciaDisparo() >= portero.getCalidadPorteria()) {
+				// Calculamos las probabilidades de disparo y parada
+				int disparo = habilidadDisparo() * tirador.getPotenciaDisparo();
+				int parada = habilidadPorteria() * portero.getCalidadPorteria();
+				// Si el disparo tiene mas probabilades que la parada
+				if (disparo >= parada) {
 					System.out.println("¡El jugador " + tirador.getNombre() + " ha marcado gol!");
-					jugadores.get(i).setVidas(jugadores.get(i).getVidas()-1);
+					// Quitamos una vida al portero
+					jugadores.get(i).setVidas(jugadores.get(i).getVidas() - 1);
 				} else {
+					// Si se produce una parada lo mostramos por consola
 					System.out.println("El jugador " + portero.getNombre() + " ha realizado una parada "
 							+ "contra el tiro de " + tirador.getNombre() + "!");
 				}
+				// Si alguno de los jugadores se ha quedado sin vida se quita del vector
 				if (jugadores.get(i).getVidas() < 1) {
 					jugadores.remove(i);
+				}
+				// Este bucle muestra como evoluciona el juego iteracion a iteracion
+				for (int j = 0; j < jugadores.size(); j++) {
+					System.out.println(jugadores.get(j).toString());
 				}
 			}
 
 		}
+		// Al final se muestra quien ha ganado
 		System.out.println("Ha ganado el jugador "+ jugadores.get(0).getNombre());
 	}
 	
+	/**
+	 * Pre: ---
+	 * Post: Este metodo genera un numero aleatorio que sirve para calcular
+	 * las probabilidades de que el jugador marque un gol.
+	 */
 	public static int habilidadDisparo() {
-		int habilidad = (int) Math.round(Math.random() * 100);
+		int habilidad = (int) Math.round(Math.random() * 50);
 		return habilidad;
 	}
 	
+	/**
+	 * Pre: ---
+	 * Post: Este metodo genera un numero aleatorio que sirve para calcular
+	 * las probabilidades de que el portero pare un disparo.
+	 */
 	public static int habilidadPorteria() {
 		int habilidad = (int) Math.round(Math.random() * 10);
 		return habilidad;
